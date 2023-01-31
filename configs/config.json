@@ -1,0 +1,12 @@
+{
+  "root_file": "./inputs/hadded_all.root",
+  "tree_name": "Nominal",
+  "input_branches": ["mBB"],
+  "auxs_branches": ["pTV","nJets","nbJets","mTW"],
+  "target_branch": "sample",
+  "learning_rate": 0.001,
+  "num_epochs": 100,
+  "batch_size": 1,
+  "num_workers": 1
+}
+
