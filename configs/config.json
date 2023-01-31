@@ -1,12 +1,15 @@
 {
   "root_file": "./inputs/hadded_all.root",
   "tree_name": "Nominal",
-  "input_branches": ["mBB"],
-  "auxs_branches": ["pTV","nJets","nbJets","mTW"],
+  "input_branches": ["mBB", "dRBB","pTB1","pTB2","mTW"],
+  "aux_branches": {
+    "int_branches": ["nbJets","nJets"],
+    "float_branches": ["pTV"]
+  },
   "target_branch": "sample",
   "learning_rate": 0.001,
   "num_epochs": 100,
-  "batch_size": 1,
+  "batch_size": 100000,
   "num_workers": 1
 }
 
