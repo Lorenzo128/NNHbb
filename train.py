@@ -40,7 +40,7 @@ optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
 # Train the model
 for epoch in range(num_epochs):
-    for inputs, auxs, targets in dataloader:
+    for inputs, targets in dataloader:
         optimizer.zero_grad()
         outputs = model(inputs)
         loss = criterion(outputs, targets)
