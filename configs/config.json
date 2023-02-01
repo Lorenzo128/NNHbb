@@ -1,5 +1,5 @@
 {
-  "root_file": "./inputs/hadded_all.root",
+  "root_file": "./inputs/skimmed.root",
   "tree_name": "Nominal",
   "input_branches": ["mBB", "dRBB","pTB1","pTB2","mTW"],
   "aux_branches": {
