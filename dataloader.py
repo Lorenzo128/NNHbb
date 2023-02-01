@@ -12,7 +12,6 @@ class RootDataset(Dataset):
 
         targets_string = tree.array(target_branch.encode())
         targets_string = np.array([x.decode() for x in targets_string])
-        #print(targets_string[:5])
         target_mapper = np.vectorize(uf.map_targets)
         self.targets = torch.from_numpy(target_mapper(targets_string)).int()
 
@@ -25,6 +24,7 @@ class RootDataset(Dataset):
         self.auxs_float = torch.from_numpy(np.stack([float_dict[branch.encode()] for branch in auxs_branches["float_branches"]], axis=1)).float()
         
         self.data = torch.utils.data.TensorDataset(self.inputs, self.targets)
+        self.data[torch.where(self.targets!=-1)]
 
 
     def __len__(self):
@@ -32,20 +32,16 @@ class RootDataset(Dataset):
 
     def __getitem__(self, idx):
 
-       inputs = self.inputs[idx]
-       if idx %1 == 0:
-          print("Event ",idx)
-          print(inputs)
-       auxs_int = self.auxs_int[idx]
-       auxs_float = self.auxs_float[idx]
-       target = self.targets[idx]
-       print(inputs)
-       if ((auxs_float[0] < 75) | (auxs_float[0]>150)):
-           return self.__getitem__(idx + 1)
-       if auxs_int[0] != 2:
-           return self.__getitem__(idx + 1)
-       if ((auxs_float[1] != 2) | (auxs_float[1] != 3)):
-           return self.__getitem__(idx + 1)
+        print("Event ",idx)
 
-       return (torch.from_numpy(inputs).float(), torch.tensor(target).long())
+        inputs = self.inputs[idx]
+        auxs_int = self.auxs_int[idx]
+        auxs_float = self.auxs_float[idx]
+        target = self.targets[idx]
+        print("aux",auxs_float)
+        print("in",inputs)
+        #if ((auxs_float[0] < 75) | (auxs_float[0]>150)):
+        #    return self.__getitem__(idx + 1)
+
+        return (torch.from_numpy(inputs).float(), torch.tensor(target).long())
     
