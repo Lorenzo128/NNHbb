@@ -37,5 +37,5 @@ class RootDataset(Dataset):
         auxs_float = self.auxs_float[idx]
         target = self.targets[idx]
 
-        return (torch.from_numpy(inputs).float(), torch.tensor(target).long())
+        return (inputs, target)
     
